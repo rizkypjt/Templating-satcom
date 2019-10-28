@@ -346,51 +346,51 @@ function parseOptions(parent, options) {
 // };
 
 // Example 2 of Chart inside src/views/Index.jsx (Total orders - Card)
-let chartExample2 = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            callback: function(value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value;
-              }
-            }
-          }
-        }
-      ]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-          content += yLabel;
-          return content;
-        }
-      }
-    }
-  },
-  data: {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [25, 20, 30, 22, 17, 29]
-      }
-    ]
-  }
-};
+// let chartExample2 = {
+//   options: {
+//     scales: {
+//       yAxes: [
+//         {
+//           ticks: {
+//             callback: function(value) {
+//               if (!(value % 10)) {
+//                 //return '$' + value + 'k'
+//                 return value;
+//               }
+//             }
+//           }
+//         }
+//       ]
+//     },
+//     tooltips: {
+//       callbacks: {
+//         label: function(item, data) {
+//           var label = data.datasets[item.datasetIndex].label || "";
+//           var yLabel = item.yLabel;
+//           var content = "";
+//           if (data.datasets.length > 1) {
+//             content += label;
+//           }
+//           content += yLabel;
+//           return content;
+//         }
+//       }
+//     }
+//   },
+//   data: {
+//     labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//     datasets: [
+//       {
+//         label: "Sales",
+//         data: [25, 20, 30, 22, 17, 29]
+//       }
+//     ]
+//   }
+// };
 
 module.exports = {
   chartOptions, // used inside src/views/Index.jsx
   parseOptions, // used inside src/views/Index.jsx
   // chartExample1, // used inside src/views/Index.jsx
-  chartExample2 // used inside src/views/Index.jsx
+  // chartExample2 // used inside src/views/Index.jsx
 };

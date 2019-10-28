@@ -4,8 +4,9 @@ import classnames from "classnames";
 // javascipt plugin for creating charts
 import Chart from "chart.js";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+// import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
+
 import {
   Button,
   Card,
@@ -19,6 +20,7 @@ import {
   Container,
   Row,
   Col
+   
 } from "reactstrap";
 
 // core components
@@ -130,10 +132,11 @@ class Index extends React.Component {
                 <CardBody>
                   {/* Chart */}
                   <div className="chart">
-                    <Bar
+                    {/* <Bar
                       data={chartExample2.data}
                       options={chartExample2.options}
-                    />
+
+                    /> */}
                   </div>
                 </CardBody>
               </Card>
