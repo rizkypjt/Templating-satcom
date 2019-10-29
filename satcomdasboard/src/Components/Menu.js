@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+
 class Menu extends Component {
     render() {
         return (
+            // <Router>
             <div>
                 <aside className="main-sidebar">
                     <section className="sidebar">
@@ -27,7 +29,7 @@ class Menu extends Component {
                                     </span>
                                 </a>
                                 <ul className="treeview-menu">
-                                    <li><a href="index.html"><i className="fa fa-circle-o" />Menu 1</a></li>
+                                    <li><a href="/home"><i className="fa fa-circle-o" />Home</a></li>
                                     <li className="active"><a href="index2.html"><i className="fa fa-circle-o" />Menu 2</a></li>
                                 </ul>
                             </li>
@@ -41,10 +43,10 @@ class Menu extends Component {
                                     </span>
                                 </a>
                                 <ul className="treeview-menu">
-                                    <li><a href="pages/charts/chartjs.html"><i className="fa fa-circle-o" /> ChartJS</a></li>
-                                    <li><a href="pages/charts/morris.html"><i className="fa fa-circle-o" /> Morris</a></li>
-                                    <li><a href="pages/charts/flot.html"><i className="fa fa-circle-o" /> Flot</a></li>
-                                    <li><a href="pages/charts/inline.html"><i className="fa fa-circle-o" /> Inline charts</a></li>
+                                    <li><a href="pages/charts/chartjs.html"><i className="fa fa-circle-o" /> Menu 1</a></li>
+                                    <li><a href="pages/charts/morris.html"><i className="fa fa-circle-o" /> Menu 2</a></li>
+                                    <li><a href="pages/charts/flot.html"><i className="fa fa-circle-o" /> Menu 3</a></li>
+                                    <li><a href="pages/charts/inline.html"><i className="fa fa-circle-o" /> Menu 4 </a></li>
                                 </ul>
                             </li>
                             <li className="treeview">
@@ -56,22 +58,16 @@ class Menu extends Component {
                                     </span>
                                 </a>
                                 <ul className="treeview-menu">
-                                    <li><a href="pages/UI/general.html"><i className="fa fa-circle-o" /> General</a></li>
-                                    <li><a href="pages/UI/icons.html"><i className="fa fa-circle-o" /> Icons</a></li>
-                                    <li><a href="pages/UI/buttons.html"><i className="fa fa-circle-o" /> Buttons</a></li>
-                                    <li><a href="pages/UI/sliders.html"><i className="fa fa-circle-o" /> Sliders</a></li>
-                                    <li><a href="pages/UI/timeline.html"><i className="fa fa-circle-o" /> Timeline</a></li>
-                                    <li><a href="pages/UI/modals.html"><i className="fa fa-circle-o" /> Modals</a></li>
+                                    <li><a href="pages/UI/general.html"><i className="fa fa-circle-o" /> Menu 1</a></li>
+                                    <li><a href="pages/UI/icons.html"><i className="fa fa-circle-o" /> Menu 2</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </section>
                     {/* /.sidebar */}
                 </aside>
-
-
-
             </div>
+            // </Router>
         );
     }
 }
