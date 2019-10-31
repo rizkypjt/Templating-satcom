@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import Menu from './Components/Menu';
-// import Footer from './Components/Footer';
-import Chart from './Chart/Chart';
+import Footer from './Components/Footer';
+import Content from './Components/Content';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Header/>
-        <Chart/>
+        <Content/>
         <Menu/>
-      
-        {/* <Footer/> */}
+        <Footer/>
       </div>
     )
   }
