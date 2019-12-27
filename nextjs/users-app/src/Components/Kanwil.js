@@ -9,92 +9,92 @@ import {
 }
   from 'reactstrap';
 
-class Kanwil extends Component {
+class Kanwils extends Component {
   state = {
-    users: [],
-    newUserData: {
+    kanwil: [],
+    newKanwilData: {
       role: '',
       name: '',
       email: ''
     },
-    editUserData: {
+    editKanwilData: {
       id: '',
       role: '',
       name: '',
       email: ''
     },
-    newUserModal: false,
-    editUserModal: false
+    newKanwilModal: false,
+    editKanwilModal: false
   }
 
   componentWillMount() {
-    this._refreshUsers();
+    this._refreshKanwils();
   }
 
-  toggleNewUserModal() {
+  toggleNewKanwilModal() {
     this.setState({
-      newUserModal: !this.state.newUserModal
+      newKanwilModal: !this.state.newKanwilModal
     });
   }
 
-  toggleEditUserModal() {
+  toggleEditKanwilModal() {
     this.setState({
-      editUserModal: !this.state.editUserModal
+      editKanwilModal: !this.state.editKanwilModal
     });
   }
 
-  addUser(e) {
+  addKanwil(e) {
     e.preventDefault();
-    axios.post('http://192.168.1.15:8000/api/users/', this.state.newUserData).then((response) => {
-      let { users } = this.state;
-      console.log('testing', users)
-      users.push(response.data);
+    axios.post('http://192.168.1.24:8000/api/kanwils/', this.state.newKanwilData).then((response) => {
+      let { kanwil } = this.state;
+      console.log('testing', kanwil)
+      kanwil.push(response.data);
 
       this.setState({
-        users, newUserModal: false, newUserData: {
+        kanwil, newKanwilModal: false, newKanwilData: {
           role: '',
           name: '',
           email: ''
         }
       });
-      this._refreshUsers();
+      this._refreshKanwils();
     });
   }
-  updateUser(e) {
+  updateKanwil(e) {
     e.preventDefault();
-    let { role, name, email } = this.state.editUserData;
+    let { role, name, email } = this.state.editKanwilData;
 
-    axios.put('http://192.168.1.15:8000/api/users/' + this.state.editUserData.id, {
+    axios.put('http://192.168.1.24:8000/api/kanwils/' + this.state.editKanwilData.id, {
       role, name, email
     }).then((response) => {
-      this._refreshUsers();
+      this._refreshKanwils();
 
       this.setState({
-        editUserModal: false, editUserData: { id: '', role: '', name: '', email: '' }
+        editKanwilModal: false, editKanwilData: { id: '', role: '', name: '', email: '' }
       })
     });
   }
-  editUser(id, role, name, email) {
+  editKanwil(id, role, name, email) {
     this.setState({
-      editUserData: { id, role, name, email }, editUserModal: !this.state.editUserModal
+      editKanwilData: { id, role, name, email }, editKanwilModal: !this.state.editKanwilModal
     });
   }
-  deleteUser(id) {
-    axios.delete('http://192.168.1.15:8000/api/users/' + id).then((response) => {
-      this._refreshUsers();
+  deleteKanwil(id) {
+    axios.delete('http://192.168.1.24:8000/api/kanwils/' + id).then((response) => {
+      this._refreshKanwils();
     });
   }
 
-  deleteUser1 = async (id) => {
-    await axios.delete('http://192.168.1.15:8000/api/users/' + id);
-    this._refreshUsers();
+  deleteKanwil1 = async (id) => {
+    await axios.delete('http://192.168.1.24:8000/api/kanwils/' + id);
+    this._refreshKanwils();
   }
 
-  _refreshUsers() {
-    axios.get('http://192.168.1.15:8000/api/users/').then((response) => {
+  _refreshKanwils() {
+    axios.get('http://192.168.1.24:8000/api/kanwils/').then((response) => {
       console.log('res', response.data)
       this.setState({
-        users: response.data.users
+        kanwil: response.data.kanwil
       })
     });
   }
@@ -102,7 +102,7 @@ class Kanwil extends Component {
 
 
   render() {
-    console.log(this.state.users)
+    console.log(this.state.kanwil)
     return (
       <div  className="App container">
           <MenuList />
@@ -110,91 +110,91 @@ class Kanwil extends Component {
           <Button
             className="my-3"
             color="primary"
-            onClick={this.toggleNewUserModal.bind(this)}>
-            Add User
+            onClick={this.toggleNewKanwilModal.bind(this)}>
+            Add Kanwil
         </Button>
 
-          <Modal isOpen={this.state.newUserModal} toggle={this.toggleNewUserModal.bind(this)}>
-            <ModalHeader toggle={this.toggleNewUserModal.bind(this)}>Add a new User</ModalHeader>
+          <Modal isOpen={this.state.newKanwilModal} toggle={this.toggleNewKanwilModal.bind(this)}>
+            <ModalHeader toggle={this.toggleNewKanwilModal.bind(this)}>Add a new Kanwil</ModalHeader>
             <ModalBody>
               <FormGroup>
                 <Label for="role">role</Label>
-                <Input id="role" value={this.state.newUserData.role} onChange={(e) => {
-                  let { newUserData } = this.state;
+                <Input id="role" value={this.state.newKanwilData.role} onChange={(e) => {
+                  let { newKanwilData } = this.state;
 
-                  newUserData.role = e.target.value;
+                  newKanwilData.role = e.target.value;
 
-                  this.setState({ newUserData });
+                  this.setState({ newKanwilData });
                 }} />
               </FormGroup>
               <FormGroup>
                 <Label for="name">name</Label>
-                <Input id="name" value={this.state.newUserData.name} onChange={(e) => {
-                  let { newUserData } = this.state;
+                <Input id="name" value={this.state.newKanwilData.name} onChange={(e) => {
+                  let { newKanwilData } = this.state;
 
-                  newUserData.name = e.target.value;
+                  newKanwilData.name = e.target.value;
 
-                  this.setState({ newUserData });
+                  this.setState({ newKanwilData });
                 }} />
               </FormGroup>
 
               <FormGroup>
                 <Label for="email">email</Label>
-                <Input id="email" value={this.state.newUserData.email} onChange={(e) => {
-                  let { newUserData } = this.state;
+                <Input id="email" value={this.state.newKanwilData.email} onChange={(e) => {
+                  let { newKanwilData } = this.state;
 
-                  newUserData.email = e.target.value;
+                  newKanwilData.email = e.target.value;
 
-                  this.setState({ newUserData });
+                  this.setState({ newKanwilData }); 
                 }} />
               </FormGroup>
 
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.addUser.bind(this)}>Add User</Button>{' '}
-              <Button color="secondary" onClick={this.toggleNewUserModal.bind(this)}>Cancel</Button>
+              <Button color="primary" onClick={this.addKanwil.bind(this)}>Add Kanwil</Button>{' '}
+              <Button color="secondary" onClick={this.toggleNewKanwilModal.bind(this)}>Cancel</Button>
             </ModalFooter>
           </Modal>
 
-          <Modal isOpen={this.state.editUserModal} toggle={this.toggleEditUserModal.bind(this)}>
-            <ModalHeader toggle={this.toggleEditUserModal.bind(this)}>Edit a new User</ModalHeader>
+          <Modal isOpen={this.state.editKanwilModal} toggle={this.toggleEditKanwilModal.bind(this)}>
+            <ModalHeader toggle={this.toggleEditKanwilModal.bind(this)}>Edit a new Kanwil</ModalHeader>
             <ModalBody>
               <FormGroup>
                 <Label for="role">role</Label>
-                <Input id="role" value={this.state.editUserData.role} onChange={(e) => {
-                  let { editUserData } = this.state;
+                <Input id="role" value={this.state.editKanwilData.role} onChange={(e) => {
+                  let { editKanwilData } = this.state;
 
-                  editUserData.role = e.target.value;
+                  editKanwilData.role = e.target.value;
 
-                  this.setState({ editUserData });
+                  this.setState({ editKanwilData });
                 }} />
               </FormGroup>
               <FormGroup>
                 <Label for="name">name</Label>
-                <Input id="name" value={this.state.editUserData.name} onChange={(e) => {
-                  let { editUserData } = this.state;
+                <Input id="name" value={this.state.editKanwilData.name} onChange={(e) => {
+                  let { editKanwilData } = this.state;
 
-                  editUserData.name = e.target.value;
+                  editKanwilData.name = e.target.value;
 
-                  this.setState({ editUserData });
+                  this.setState({ editKanwilData });
                 }} />
               </FormGroup>
 
               <FormGroup>
                 <Label for="email">email</Label>
-                <Input id="email" value={this.state.editUserData.email} onChange={(e) => {
-                  let { editUserData } = this.state;
+                <Input id="email" value={this.state.editKanwilData.email} onChange={(e) => {
+                  let { editKanwilData } = this.state;
 
-                  editUserData.email = e.target.value;
+                  editKanwilData.email = e.target.value;
 
-                  this.setState({ editUserData });
+                  this.setState({ editKanwilData });
                 }} />
               </FormGroup>
 
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.updateUser.bind(this)}>Update User</Button>{' '}
-              <Button color="secondary" onClick={this.toggleEditUserModal.bind(this)}>Cancel</Button>
+              <Button color="primary" onClick={this.updateKanwil.bind(this)}>Update Kanwil</Button>{' '}
+              <Button color="secondary" onClick={this.toggleEditKanwilModal.bind(this)}>Cancel</Button>
             </ModalFooter>
           </Modal>
 
@@ -211,24 +211,24 @@ class Kanwil extends Component {
             </thead>
             <tbody>
               {
-                this.state.users.map(user =>
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.role}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
+                this.state.kanwils.map(kanwil =>
+                  <tr key={kanwil.id}>
+                    <td>{kanwil.id}</td>
+                    <td>{kanwil.role}</td>
+                    <td>{kanwil.name}</td>
+                    <td>{kanwil.email}</td>
                     <td>
                       <Button
                         color="success"
                         size="sm"
                         className="mr-2"
-                        onClick={this.editUser.bind(this, user.id, user.role, user.name, user.email)}>
+                        onClick={this.editKanwil.bind(this, kanwil.id, kanwil.role, kanwil.name, kanwil.email)}>
                         Edit
                     </Button>
                       <Button
                         color="danger"
                         size="sm"
-                        onClick={this.deleteUser1.bind(this, user.id)}>
+                        onClick={this.deleteKanwil1.bind(this, kanwil.id)}>
                         Delete
                     </Button>
                     </td>
@@ -242,4 +242,4 @@ class Kanwil extends Component {
   }
 }
 
-export default Kanwil;
+export default Kanwils;
