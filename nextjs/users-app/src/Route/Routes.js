@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from '../App';
 import Users from '../Components/Users';
 import Kanwil from '../Components/Kanwil';
+import Ukers from '../Components/Ukers';
 
 class Routing extends Component {
     render() {
@@ -10,7 +11,9 @@ class Routing extends Component {
             <Router>
                 <Route path="/" exact component={App} />
                 <Route path="/users" component={Users} />
-                <Route path="/kanwil" component={Kanwil} />
+                <Route path="/kanwils" component={Kanwil} />
+                <Route path="/ukers" component={Ukers} />
+
 
             </Router>
         )

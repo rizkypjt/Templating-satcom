@@ -9,8 +9,8 @@ class MenuList extends Component {
                 <div className="App container">
                     <Breadcrumb tag="nav" listTag="div">
                         <BreadcrumbItem tag="a" href="users">Users</BreadcrumbItem>
-                        <BreadcrumbItem tag="a" href="Kanwil">Kanwil</BreadcrumbItem>
-                        <BreadcrumbItem tag="a" href="#">Data</BreadcrumbItem>
+                        <BreadcrumbItem tag="a" href="Kanwils">Kanwils</BreadcrumbItem>
+                        <BreadcrumbItem tag="a" href="ukers">Ukers</BreadcrumbItem>
                     </Breadcrumb>
                     </div>
                 </div>

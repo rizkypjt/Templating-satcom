@@ -51,7 +51,7 @@ class Users extends Component {
 
     addUser(e) {
         e.preventDefault();
-        axios.post('http://192.168.1.15:8000/api/users/', this.state.newUserData).then((response) => {
+        axios.post('http://192.168.1.14:8000/api/users/', this.state.newUserData).then((response) => {
             let { users } = this.state;
             console.log('testing', users)
             users.push(response.data);
@@ -70,7 +70,7 @@ class Users extends Component {
         e.preventDefault();
         let { role, name, email } = this.state.editUserData;
 
-        axios.put('http://192.168.1.15:8000/api/users/' + this.state.editUserData.id, {
+        axios.put('http://192.168.1.14:8000/api/users/' + this.state.editUserData.id, {
             role, name, email
         }).then((response) => {
             this._refreshUsers();
@@ -86,18 +86,18 @@ class Users extends Component {
         });
     }
     deleteUser(id) {
-        axios.delete('http://192.168.1.15:8000/api/users/' + id).then((response) => {
+        axios.delete('http://192.168.1.14:8000/api/users/' + id).then((response) => {
             this._refreshUsers();
         });
     }
 
     deleteUser1 = async (id) => {
-        await axios.delete('http://192.168.1.15:8000/api/users/' + id);
+        await axios.delete('http://192.168.1.14:8000/api/users/' + id);
         this._refreshUsers();
     }
 
     _refreshUsers() {
-        axios.get('http://192.168.1.15:8000/api/users/').then((response) => {
+        axios.get('http://192.168.1.14:8000/api/users/').then((response) => {
             console.log('res', response.data)
             this.setState({
                 users: response.data.users

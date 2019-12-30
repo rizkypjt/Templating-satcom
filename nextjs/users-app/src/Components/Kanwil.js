@@ -11,17 +11,13 @@ import {
 
 class Kanwils extends Component {
   state = {
-    kanwil: [],
+    kanwils: [],
     newKanwilData: {
-      role: '',
       name: '',
-      email: ''
     },
     editKanwilData: {
       id: '',
-      role: '',
       name: '',
-      email: ''
     },
     newKanwilModal: false,
     editKanwilModal: false
@@ -45,16 +41,14 @@ class Kanwils extends Component {
 
   addKanwil(e) {
     e.preventDefault();
-    axios.post('http://192.168.1.24:8000/api/kanwils/', this.state.newKanwilData).then((response) => {
-      let { kanwil } = this.state;
-      console.log('testing', kanwil)
-      kanwil.push(response.data);
+    axios.post('http://192.168.1.14:8000/api/kanwils/', this.state.newKanwilData).then((response) => {
+      let { kanwils } = this.state;
+      console.log('testing', kanwils)
+      kanwils.push(response.data);
 
       this.setState({
-        kanwil, newKanwilModal: false, newKanwilData: {
-          role: '',
+        kanwils, newKanwilModal: false, newKanwilData: {
           name: '',
-          email: ''
         }
       });
       this._refreshKanwils();
@@ -62,39 +56,35 @@ class Kanwils extends Component {
   }
   updateKanwil(e) {
     e.preventDefault();
-    let { role, name, email } = this.state.editKanwilData;
+    let { name } = this.state.editKanwilData;
 
-    axios.put('http://192.168.1.24:8000/api/kanwils/' + this.state.editKanwilData.id, {
-      role, name, email
+    axios.put('http://192.168.1.14:8000/api/kanwils/' + this.state.editKanwilData.id, { name
     }).then((response) => {
       this._refreshKanwils();
-
       this.setState({
-        editKanwilModal: false, editKanwilData: { id: '', role: '', name: '', email: '' }
+        editKanwilModal: false, editKanwilData: { id: '', name: ''  }
       })
     });
   }
-  editKanwil(id, role, name, email) {
+  editKanwil(id, name) {
     this.setState({
-      editKanwilData: { id, role, name, email }, editKanwilModal: !this.state.editKanwilModal
+      editKanwilData: { id, name }, editKanwilModal: !this.state.editKanwilModal
     });
   }
-  deleteKanwil(id) {
-    axios.delete('http://192.168.1.24:8000/api/kanwils/' + id).then((response) => {
-      this._refreshKanwils();
-    });
-  }
-
+ 
   deleteKanwil1 = async (id) => {
-    await axios.delete('http://192.168.1.24:8000/api/kanwils/' + id);
-    this._refreshKanwils();
+    const choice = global.confirm(`delete ${id}?`)
+    if (choice) {
+      await axios.delete('http://192.168.1.14:8000/api/kanwils/' + id);
+      this._refreshKanwils();
+    }
   }
 
   _refreshKanwils() {
-    axios.get('http://192.168.1.24:8000/api/kanwils/').then((response) => {
+    axios.get('http://192.168.1.14:8000/api/kanwils/').then((response) => {
       console.log('res', response.data)
       this.setState({
-        kanwil: response.data.kanwil
+        kanwils: response.data.kanwils
       })
     });
   }
@@ -102,7 +92,7 @@ class Kanwils extends Component {
 
 
   render() {
-    console.log(this.state.kanwil)
+    console.log(this.state.kanwils)
     return (
       <div  className="App container">
           <MenuList />
@@ -117,16 +107,7 @@ class Kanwils extends Component {
           <Modal isOpen={this.state.newKanwilModal} toggle={this.toggleNewKanwilModal.bind(this)}>
             <ModalHeader toggle={this.toggleNewKanwilModal.bind(this)}>Add a new Kanwil</ModalHeader>
             <ModalBody>
-              <FormGroup>
-                <Label for="role">role</Label>
-                <Input id="role" value={this.state.newKanwilData.role} onChange={(e) => {
-                  let { newKanwilData } = this.state;
-
-                  newKanwilData.role = e.target.value;
-
-                  this.setState({ newKanwilData });
-                }} />
-              </FormGroup>
+     
               <FormGroup>
                 <Label for="name">name</Label>
                 <Input id="name" value={this.state.newKanwilData.name} onChange={(e) => {
@@ -135,17 +116,6 @@ class Kanwils extends Component {
                   newKanwilData.name = e.target.value;
 
                   this.setState({ newKanwilData });
-                }} />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="email">email</Label>
-                <Input id="email" value={this.state.newKanwilData.email} onChange={(e) => {
-                  let { newKanwilData } = this.state;
-
-                  newKanwilData.email = e.target.value;
-
-                  this.setState({ newKanwilData }); 
                 }} />
               </FormGroup>
 
@@ -159,33 +129,13 @@ class Kanwils extends Component {
           <Modal isOpen={this.state.editKanwilModal} toggle={this.toggleEditKanwilModal.bind(this)}>
             <ModalHeader toggle={this.toggleEditKanwilModal.bind(this)}>Edit a new Kanwil</ModalHeader>
             <ModalBody>
-              <FormGroup>
-                <Label for="role">role</Label>
-                <Input id="role" value={this.state.editKanwilData.role} onChange={(e) => {
-                  let { editKanwilData } = this.state;
 
-                  editKanwilData.role = e.target.value;
-
-                  this.setState({ editKanwilData });
-                }} />
-              </FormGroup>
               <FormGroup>
                 <Label for="name">name</Label>
                 <Input id="name" value={this.state.editKanwilData.name} onChange={(e) => {
                   let { editKanwilData } = this.state;
 
                   editKanwilData.name = e.target.value;
-
-                  this.setState({ editKanwilData });
-                }} />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="email">email</Label>
-                <Input id="email" value={this.state.editKanwilData.email} onChange={(e) => {
-                  let { editKanwilData } = this.state;
-
-                  editKanwilData.email = e.target.value;
 
                   this.setState({ editKanwilData });
                 }} />
@@ -203,9 +153,7 @@ class Kanwils extends Component {
             <thead>
               <tr>
                 <th>#</th>
-                <th>role</th>
-                <th>name</th>
-                <th>email</th>
+                <th>name</th>          
                 <th>Actions</th>
               </tr>
             </thead>
@@ -214,15 +162,13 @@ class Kanwils extends Component {
                 this.state.kanwils.map(kanwil =>
                   <tr key={kanwil.id}>
                     <td>{kanwil.id}</td>
-                    <td>{kanwil.role}</td>
-                    <td>{kanwil.name}</td>
-                    <td>{kanwil.email}</td>
+                    <td>{kanwil.name}</td>              
                     <td>
                       <Button
                         color="success"
                         size="sm"
                         className="mr-2"
-                        onClick={this.editKanwil.bind(this, kanwil.id, kanwil.role, kanwil.name, kanwil.email)}>
+                        onClick={this.editKanwil.bind(this, kanwil.id, kanwil.name)}>
                         Edit
                     </Button>
                       <Button
