@@ -41,7 +41,7 @@ class Kanwils extends Component {
 
   addKanwil(e) {
     e.preventDefault();
-    axios.post('http://192.168.1.14:8000/api/kanwils/', this.state.newKanwilData).then((response) => {
+    axios.post('http://192.168.1.12:8000/api/kanwils/', this.state.newKanwilData).then((response) => {
       let { kanwils } = this.state;
       console.log('testing', kanwils)
       kanwils.push(response.data);
@@ -58,7 +58,7 @@ class Kanwils extends Component {
     e.preventDefault();
     let { name } = this.state.editKanwilData;
 
-    axios.put('http://192.168.1.14:8000/api/kanwils/' + this.state.editKanwilData.id, { name
+    axios.put('http://192.168.1.12:8000/api/kanwils/' + this.state.editKanwilData.id, { name
     }).then((response) => {
       this._refreshKanwils();
       this.setState({
@@ -75,13 +75,13 @@ class Kanwils extends Component {
   deleteKanwil1 = async (id) => {
     const choice = global.confirm(`delete ${id}?`)
     if (choice) {
-      await axios.delete('http://192.168.1.14:8000/api/kanwils/' + id);
+      await axios.delete('http://192.168.1.12:8000/api/kanwils/' + id);
       this._refreshKanwils();
     }
   }
 
   _refreshKanwils() {
-    axios.get('http://192.168.1.14:8000/api/kanwils/').then((response) => {
+    axios.get('http://192.168.1.12:8000/api/kanwils/').then((response) => {
       console.log('res', response.data)
       this.setState({
         kanwils: response.data.kanwils

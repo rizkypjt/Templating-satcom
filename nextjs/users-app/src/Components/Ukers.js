@@ -45,7 +45,7 @@ class Ukers extends Component {
 
     addUker(e) {
         e.preventDefault();
-        axios.post('http://192.168.1.14:8000/api/ukers/', this.state.newUkerData).then((response) => {
+        axios.post('http://192.168.1.12:8000/api/ukers/', this.state.newUkerData).then((response) => {
             let { ukers } = this.state;
             console.log('testing', ukers)
             ukers.push(response.data);
@@ -64,7 +64,7 @@ class Ukers extends Component {
         e.preventDefault();
         let { name, user_id, kanwil_id } = this.state.editUkerData;
 
-        axios.put('http://192.168.1.14:8000/api/ukers/' + this.state.editUkerData.id, {
+        axios.put('http://192.168.1.12:8000/api/ukers/' + this.state.editUkerData.id, {
             name, user_id, kanwil_id
         }).then((response) => {
             this._refreshUkers();
@@ -82,13 +82,13 @@ class Ukers extends Component {
     deleteUker1 = async (id) => {
         const choice = global.confirm(`delete ${id}?`)
         if (choice) {
-            await axios.delete(`http://192.168.1.14:8000/api/ukers/` + id);
+            await axios.delete(`http://192.168.1.12:8000/api/ukers/` + id);
             this._refreshUkers();
         }
     }
 
     _refreshUkers() {
-        axios.get(`http://192.168.1.14:8000/api/ukers/`).then((response) => {
+        axios.get(`http://192.168.1.12:8000/api/ukers/`).then((response) => {
             console.log('res', response.data)
             this.setState({
                 ukers: response.data.ukers
