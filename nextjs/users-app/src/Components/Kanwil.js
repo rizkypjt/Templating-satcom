@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MenuList from './MenuList'
 import {
@@ -183,6 +184,7 @@ class Kanwils extends Component {
               }
             </tbody>
           </Table>
+          <Link to="/logout">Logout</Link>
         </div>
     );
   }

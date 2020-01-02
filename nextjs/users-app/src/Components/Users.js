@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import MenuList from './MenuList';
 
 import {
@@ -243,6 +244,7 @@ class Users extends Component {
                         }
                     </tbody>
                 </Table>
+                <Link to="/logout">Logout</Link>
             </div>
     );
     }

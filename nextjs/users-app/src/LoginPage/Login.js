@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import login from '../Api/Mock';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+
+// import { Redirect } from 'react-router-dom';
 
 
-class Home extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,8 +35,8 @@ class Home extends Component {
         console.log(res)
 
         if (res) {
-            alert('Succes')
-            // return <Redirect to="/users" />
+            this.props.history.push('/users');
+            // alert('Succes')
         } else {
             alert("Login Gagal");
         }
@@ -42,6 +44,7 @@ class Home extends Component {
 
 
     render() {
+    
         return (
             <div className="container">
                 <div className="row">
@@ -81,4 +84,4 @@ class Home extends Component {
         );
     }
 }
-export default Home
+export default Login;
